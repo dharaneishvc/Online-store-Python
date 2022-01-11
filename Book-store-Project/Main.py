@@ -17,11 +17,17 @@ class User:
     def getmobile(self):
         return self.mobile
 
+    def login(self, uname, pwd):
+        if(self.__username == uname and self.__password == pwd):
+            return 1
+        else:
+            return 0
+
     def resetpass(self):
-        if(self.password == input("Enter Old Paswword")):
+        if(self.__password == input("Enter Old Paswword")):
             np = input("Enter New Password")
             if( np == input("Confirm Re-enter Password")):
-                self.password = np
+                self.__password = np
                 print("Password Changed Succesfully")
             else:
                 print("Password doesn't match. Try Again.")
@@ -58,6 +64,12 @@ class Seller(User):
     def myprods(self, id):
         self.books.append(id)
 
+    def diplay(self):
+        print("UserName: " + self.__username)
+        print("Name: " + self.name)
+        print("Mobile: " + self.mobile)
+        print("Email: " + self.mail)
+        print("My Books (IDs): " + self.books)
 
 class Customer(User):
     Count = 0
@@ -70,7 +82,7 @@ class Customer(User):
     def getpublication(self):
         return self.publication
 
-    def setname(self, pub):
+    def setpublication(self, pub):
         self.publication = pub
 
     def retcount(cls):
@@ -83,6 +95,14 @@ class Customer(User):
                 return
         mydict = {"pid":pid, "count":count}
         self.cart.append(mydict)
+
+    def diplay(self):
+        print("UserName: " + self.__username)
+        print("Publication: " + self.publication)
+        print("Mobile: " + self.mobile)
+        print("Email: " + self.mail)
+        print("My Cart (PID, Count): " + self.cart)
+
 
     
 class Books:
@@ -183,12 +203,30 @@ class Ebook(Books):
 
 print("WELCOME TO BOOK STORE")
 c = 0
+Sellers = []
+Customers = []
+Paperbanks = []
+Ebooks = []
+
+
 while(c != 5):
     print("1. Customer Log In \n 2. Seller Log In \n 3. Customer Sign Up \n 4. Seller Sign Up \n 5.Exit \nEnter:")
     c = int(input())
     while (c>5  or c<1):
         c = int(input("Error! Enter value(1-4):"))
     if c==1 :
+        s = 0
+        uname = input("Enter Username:")
+        pwd = input("Enter Password")
+        for i in Customers:
+            if(i.login(uname,pwd)):
+                print("Log In Sucessfull")
+                s=1
+                break
+        if(s==0):
+            print("Log In Unsucessfull")
+        else:
+
 
     elif c==2 :
 
@@ -199,6 +237,3 @@ while(c != 5):
     else:
         print("Thank You for using this product")
 
-
-
-    
