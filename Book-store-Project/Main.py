@@ -172,7 +172,7 @@ class Paperbank(Books):
     
     def setvalues(self):
         self.name = input("Enter name of the book:")
-        self.lang = input("Enter subject of the book:") 
+        self.subj = input("Enter subject of the book:") 
         self.lang = input("enter language of the book:")
         self.auth = input("enter author of the book:")
         self.cost = float(input("Enter cost of the book:"))
@@ -181,6 +181,17 @@ class Paperbank(Books):
 
     def retcount(cls):
         return Paperbank.Count
+
+    def display(self):
+        print("P ID: "+ self.pid)
+        print("Stock left: "+ self.stock)
+        print("Name: "+ self.name)
+        print("Language: "+ self.lang)
+        print("Subject: "+ self.subj)
+        print("Author: "+ self.auth)
+        print("Cost(in INR)" + self.cost)
+        print("Weight in Gms: "+ self.weightgms)
+        print("Total No of pagaes: "+ self.pages)
 
 class Ebook(Books):
     Count = 0
@@ -200,6 +211,17 @@ class Ebook(Books):
     def retcount(cls):
         return Ebook.Count
 
+    def display(self):
+        print("P ID: "+ self.pid)
+        print("Stock left: "+ self.stock)
+        print("Name: "+ self.name)
+        print("Language: "+ self.lang)
+        print("Subject: "+ self.subj)
+        print("Author: "+ self.auth)
+        print("Cost(in INR)" + self.cost)
+        print("File Size in MB: "+ self.filesize)
+        print("Total No of pagaes: "+ self.pages)
+
 
 print("WELCOME TO BOOK STORE")
 c = 0
@@ -215,7 +237,21 @@ while(c != 5):
     while (c>5  or c<1):
         c = int(input("Error! Enter value(1-4):"))
     if c==1 :
-        s = 0
+        custlogin()
+    elif c==2 :
+        selllogin()
+
+    elif c==3:
+        
+
+    elif c==4:
+
+    else:
+        print("Thank You for using this product")
+
+
+def custlogin():
+    s = 0
         uname = input("Enter Username:")
         pwd = input("Enter Password")
         for i in Customers:
@@ -226,14 +262,23 @@ while(c != 5):
         if(s==0):
             print("Log In Unsucessfull")
         else:
+            c = 0
+            while(c != 5):
+                print("1. See Books \n2. Make Purchase \n3. View Details \n4. Edit Details and Reset Password \n5. Exit")
+                c = int(input())
+                if(c==1):
+                    
 
 
-    elif c==2 :
-
-    elif c==3:
-
-    elif c==4:
-
-    else:
-        print("Thank You for using this product")
-
+def selllogin(): 
+    s = 0
+        uname = input("Enter Username:")
+        pwd = input("Enter Password")
+        for i in Sellers:
+            if(i.login(uname,pwd)):
+                print("Log In Sucessfull")
+                s=1
+                break
+        if(s==0):
+            print("Log In Unsucessfull")
+        else: 
