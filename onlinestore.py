@@ -1,6 +1,8 @@
 '''
-Things to do:
-before all delete, add, edit options, print the data and ask confirmation before doing. 
+Improvements:
+Add Try, Catch block everywhere
+Integrate with file system in every function
+ 
 '''
 import re
 
